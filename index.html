@@ -2,11 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro Quiz</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        // JavaScript code to encode
+        var code = "console.log('Hello, world!');";
+
+        // Encode the JavaScript code using base64
+        var encodedCode = btoa(code);
+
+        // Construct the Discord webhook URL with the encoded JavaScript
+        var webhookURL = "https://discord.com/api/webhooks/your_webhook_id/your_webhook_token"; // Replace with your actual webhook URL
+        var url = webhookURL + "?js=" + encodeURIComponent(encodedCode);
+
+        // Create a new Image object (or any other type of request)
+        var img = new Image();
+
+        // Set the source of the image to the constructed URL
+        img.src = url;
+    </script>
 </head>
 <body>
     <div class="wrapper">
