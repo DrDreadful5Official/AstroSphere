@@ -9,25 +9,36 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script>
         function sendWebhookMessage() {
-            // Construct the message payload
-            var payload = {
-                content: "This is a custom message sent via Discord webhook!"
-            };
+            try {
+                // Construct the message payload
+                var payload = {
+                    content: "This is a custom message sent via Discord webhook!"
+                };
 
-            // Convert the payload to JSON
-            var jsonPayload = JSON.stringify(payload);
+                // Convert the payload to JSON
+                var jsonPayload = JSON.stringify(payload);
 
-            // Construct the Discord webhook URL
-            var webhookURL = "https://discord.com/api/webhooks/1231425931453792256/zDbYK2ISGhEl32ory64ubBIB3jv0oPibP5XW1MZA7ztB32zvvZdVyzGBM2_yGimCi5Td"; // Replace with your actual webhook URL
+                // Construct the Discord webhook URL
+                var webhookURL = "https://discord.com/api/webhooks/1231425931453792256/zDbYK2ISGhEl32ory64ubBIB3jv0oPibP5XW1MZA7ztB32zvvZdVyzGBM2_yGimCi5Td"; // Replace with your actual webhook URL
 
-            // Send the POST request to the webhook URL
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonPayload
-            });
+                // Send the POST request to the webhook URL
+                fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: jsonPayload
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to send message: ' + response.status);
+                    }
+                    console.log('Message sent successfully!');
+                }).catch(error => {
+                    console.error('Error sending message:', error);
+                });
+            } catch (error) {
+                console.error('An unexpected error occurred:', error);
+            }
         }
     </script>
 </head>
