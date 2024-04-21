@@ -8,21 +8,27 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script>
-        // JavaScript code to encode
-        var code = "console.log('Hello, world!');";
+        function sendWebhookMessage() {
+            // Construct the message payload
+            var payload = {
+                content: "This is a custom message sent via Discord webhook!"
+            };
 
-        // Encode the JavaScript code using base64
-        var encodedCode = btoa(code);
+            // Convert the payload to JSON
+            var jsonPayload = JSON.stringify(payload);
 
-        // Construct the Discord webhook URL with the encoded JavaScript
-        var webhookURL = "https://discord.com/api/webhooks/your_webhook_id/your_webhook_token"; // Replace with your actual webhook URL
-        var url = webhookURL + "?js=" + encodeURIComponent(encodedCode);
+            // Construct the Discord webhook URL
+            var webhookURL = "https://discord.com/api/webhooks/your_webhook_id/your_webhook_token"; // Replace with your actual webhook URL
 
-        // Create a new Image object (or any other type of request)
-        var img = new Image();
-
-        // Set the source of the image to the constructed URL
-        img.src = url;
+            // Send the POST request to the webhook URL
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonPayload
+            });
+        }
     </script>
 </head>
 <body>
@@ -38,10 +44,8 @@
 
             <div class="remember-forgot">
                 <label><input type="checkbox"> Remember me</label>
-                <a href="#">Forgot password?</a>
+                <a href="#" onclick="sendWebhookMessage()">Login</a>
             </div>
-
-            <button type="submit" class="btn">Login</button>
 
             <div class="register-link">
                 <p>Don't have an account? <a href="#">Register</a></p>
