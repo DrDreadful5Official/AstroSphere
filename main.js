@@ -1,27 +1,21 @@
-const wrapper = document.getElementById('wrapper');
-let animationFrameId;
+const wrapper = document.querySelector(".wrapper");
+const logginLink = document.querySelector(".login-link");
+const registerLink = document.querySelector(".register-link");
+const btnPopup = document.querySelector(".btnLogin-popup");
+const iconClose = document.querySelector(".icon-close");
 
-function handleMouseMove(event) {
-    const rect = wrapper.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    
-    const rotateX = (mouseY / rect.height - 0.5) * 3; // Adjust the multiplier for desired rotation sensitivity
-    const rotateY = (mouseX / rect.width - 0.5) * -3; // Adjust the multiplier for desired rotation sensitivity
-    
-    wrapper.style.transition = 'transform 0.1s ease-in-out';
-    wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+registerLink.addEventListener("click", ()=> {
+    wrapper.classList.add("active");
+})
 
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = requestAnimationFrame(() => {
-        wrapper.style.transition = 'none';
-    });
-}
+logginLink.addEventListener("click", ()=> {
+    wrapper.classList.remove("active");
+})
 
-function resetTransform() {
-    wrapper.style.transition = 'transform 0.3s ease-in-out';
-    wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
-}
+btnPopup.addEventListener("click", ()=> {
+    wrapper.classList.add("active-popup");
+})
 
-wrapper.addEventListener('mousemove', handleMouseMove);
-wrapper.addEventListener('mouseleave', resetTransform);
+iconClose.addEventListener("click", ()=> {
+    wrapper.classList.remove("active-popup");
+})
